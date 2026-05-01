@@ -38,11 +38,13 @@ while (1):
             perimeter = 0.0
             for cnt in contours:
                 perimeter += cv2.arcLength(cnt, True)  # True = closed contour
-            x, y, w, h, area = stats[i]
-            circularity = (4 * math.pi * area / math.pow(perimeter,2))
-            if (circularity > maxCirc) and 50 < area < 100:
-                resPos = np.array([x,y], dtype=np.uint8)
-            #End if
+            if perimeter > 0:
+                x, y, w, h, area = stats[i]
+                circularity = (4 * math.pi * area / math.pow(perimeter,2))
+                if (circularity > maxCirc) and 50 < area < 100:
+                    resPos = np.array([x,y], dtype=np.uint8)
+                #End if
+            #end if
         #End for
         npSocket.send(resPos)
     else:
