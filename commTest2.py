@@ -11,7 +11,7 @@ npSocket.startServer(9999)
 while True:
     matLabCmd = npSocket.receiveCmd()
     print(matLabCmd)
-    if matLabCmd == 0:
+    if matLabCmd == '0':
         print("SENDING LEFT COMMAND")
         npSocket.send(np.array(1))
         leftImg = npSocket.receive()
