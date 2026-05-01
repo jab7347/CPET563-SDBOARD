@@ -33,7 +33,7 @@ while (1):
         for i in range(1, num_labels):
             component_mask = np.uint8(labels == i) * 255
             # Find contours for the component
-            contours, hierarchy = cv2.findContours(component_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            _, contours, hierarchy = cv2.findContours(component_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
             # Calculate perimeter (arc length) for each contour
             perimeter = 0.0
             for cnt in contours:
