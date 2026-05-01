@@ -97,7 +97,7 @@ class NumpySocket():
             socket = self.client_connection
 
         #length = None
-        length = 360960*8
+        length = 921600*8
         frameBuffer = bytearray()
         while True:
             #data = socket.recv(socket_buffer_size)
