@@ -11,13 +11,13 @@ npSocket.startServer(9999)
 while True:
     matLabCmd = npSocket.receiveCmd()
     print(matLabCmd)
-    if matLabCmd == "ImageReady":
-        npSocket.send("Left")
+    if matLabCmd == 0:
+        npSocket.send(1)
         leftImg = npSocket.receive()
-        npSocket.send("Right")
+        npSocket.send(2)
         rightImg = npSocket.receive()
         npSocket.send(np.array([400,400]))
-    elif matLabCmd == "Quit":
+    elif matLabCmd == 99:
         break
     #End if
 npSocket.close()
