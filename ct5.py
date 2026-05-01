@@ -2,6 +2,7 @@ from numpysocket import NumpySocket
 import cv2
 import numpy as np
 import time
+import math
 
 npSocket = NumpySocket()
 npSocket.startServer(9999)
@@ -28,9 +29,18 @@ while (1):
 
         num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(leftEdge, connectivity=8, ltype=cv2.CV_32S)
         resPos= np.array(['1','1'],dtype=np.uint8)
+        maxCirc = 0
         for i in range(1, num_labels):
+            component_mask = np.uint8(labels == i) * 255
+            # Find contours for the component
+            contours, _ = cv2.findContours(component_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            # Calculate perimeter (arc length) for each contour
+            perimeter = 0.0
+            for cnt in contours:
+                perimeter += cv2.arcLength(cnt, True)  # True = closed contour
             x, y, w, h, area = stats[i]
-            if (abs(w-h) < 25 ) and 100 < area < 200:
+            circularity = (4* math.pi * area / perimeter^2)
+            if (circularity > maxCirc) and 50 < area < 100:
                 resPos = np.array([x,y], dtype=np.uint8)
             #End if
         #End for
