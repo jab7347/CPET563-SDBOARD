@@ -12,9 +12,9 @@ while True:
     matLabCmd = npSocket.receiveCmd()
     print(matLabCmd)
     if matLabCmd == 0:
-        npSocket.send(1)
+        npSocket.send(np.array(1))
         leftImg = npSocket.receive()
-        npSocket.send(2)
+        npSocket.send(np.array(2))
         rightImg = npSocket.receive()
         npSocket.send(np.array([400,400]))
     elif matLabCmd == 99:
