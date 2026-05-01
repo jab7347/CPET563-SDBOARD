@@ -46,6 +46,7 @@ while (1):
                 #End if
             #end if
         #End for
+        print "sent"
         npSocket.send(resPos)
     else:
         print "received unknown command"
